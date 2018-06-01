@@ -37,10 +37,11 @@ public class Manager extends Person implements Serializable {
         if(worker.size() <1)
             throw new WorkersListEmpty();
         StringBuilder rez = new StringBuilder();
+        System.out.println(personList.size());
         for (int id : worker) {
             for (Person p : personList) {
                 if(p.getId() == id)
-                    rez.append(String.format("%s : %s %s", p.getId(), p.getLastName(), p.getFirstName()));
+                    rez.append(String.format("\nРаботники :\n%s : %s %s", p.getId(), p.getLastName(), p.getFirstName()));
 
             }
         }

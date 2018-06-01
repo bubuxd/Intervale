@@ -1,6 +1,6 @@
 package io;
 
-import person.Person;
+import person.*;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -23,10 +23,26 @@ public class ReadFile {
         List<Person> personList = new ArrayList<>();
         try (FileInputStream fis = new FileInputStream(file);
              ObjectInputStream ois = new ObjectInputStream(fis)) {
-            do {
-                Person p = (Person) ois.readObject();
-                personList.add(p);
-            } while (ois.available() > 0);
+            while (ois.available() > 0) {
+                char shortName = ois.readChar();
+                switch (shortName) {
+                    case 'w':
+                        Worker w = (Worker) ois.readObject();
+                        personList.add(w);
+                        break;
+                    case 'm':
+                        Manager m = (Manager) ois.readObject();
+                        personList.add(m);
+                        break;
+                    case 'o':
+                        Other o = (Other) ois.readObject();
+                        personList.add(o);
+                        break;
+                    default:
+                        System.out.println("Произошла ошибка при загрузке :" + shortName);
+                }
+            }
+            System.out.println("pS " +personList.size());
         } catch (IOException ex) {
             ex.printStackTrace();
         } catch (ClassNotFoundException ex) {

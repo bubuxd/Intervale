@@ -125,7 +125,7 @@ public class PersonController {
 
     public String showAllWorkersListInManager(String arg) throws IncorrectArgument, NotFoundPersonById, WorkersListEmpty {
         Manager m = (Manager) getPersonById(arg);
-        return String.format("id : %s %s %s\n", m.getId(), m.getLastName(), m.getFirstName(), m.printWorkers(personList));
+        return String.format("id : %s %s %s %s\n", m.getId(), m.getLastName(), m.getFirstName(), m.printWorkers(personList));
     }
 
     public List<Person> getWorkersList() {

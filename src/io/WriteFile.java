@@ -22,8 +22,7 @@ public class WriteFile {
         System.out.println(file.toString());
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file))) {
             for (Person person : personList) {
-//                oos.writeChars(person.getPersonTypeString());
-//                if(person.getPersonType() == PersonType.Manager)
+                oos.writeChar(person.getPersonType().getShortName());
                 oos.writeObject(person);
                 oos.flush();
             }

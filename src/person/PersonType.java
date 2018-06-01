@@ -3,24 +3,33 @@ package person;
 import exception.IncorrectType;
 
 public enum PersonType {
-    Worker {
+    Worker('w') {
         @Override
         public String print() {
             return "Работник";
         }
     },
-    Manager {
+    Manager('m') {
         @Override
         public String print() {
             return "Менеджер";
         }
     },
-    Other {
+    Other('o') {
         @Override
         public String print() {
             return "Просто спец";
         }
     };
+    private char shortName;
+
+   PersonType(char s) {
+        this.shortName = s;
+    }
+
+    public char getShortName() {
+        return shortName;
+    }
 
     public static PersonType getType(String personType) throws IncorrectType {
         switch (personType) {
