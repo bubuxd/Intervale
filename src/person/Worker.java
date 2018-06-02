@@ -23,4 +23,11 @@ public class Worker extends Person implements Serializable {
                 this.getBirthDate().format(formatter), this.getStartWorkDate().format(formatter),
                 this.getPersonType());
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s : %s %s %s %s %s %s", getId(), getLastName(), getFirstName(),
+                getMidName(), getPersonType().print(), getBirthDate().format(formatter),
+                getStartWorkDate().format(formatter));
+    }
 }

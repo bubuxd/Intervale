@@ -20,41 +20,41 @@ public class Manager extends Person implements Serializable {
     }
 
     public Manager(String[] person, String workerList) throws IncorrectArgument, IncorrectType {
-        super(person[0],person[1], person[2], person[3],
-                LocalDate.parse(person[4], formatter),LocalDate.parse(person[5], formatter),
+        super(person[0], person[1], person[2], person[3],
+                LocalDate.parse(person[4], formatter), LocalDate.parse(person[5], formatter),
                 person[6]);
-        worker= new ArrayList<>();
-        if(workerList.length() > 0)
-        for (String idWorker : workerList.trim().split(" ")) {
-            this.setWorker(Integer.parseInt(idWorker));
-        }
+        worker = new ArrayList<>();
+        if (workerList.length() > 0)
+            for (String idWorker : workerList.trim().split(" ")) {
+                this.setWorker(Integer.parseInt(idWorker));
+            }
     }
 
 
     public void setWorker(int idPerson) throws IncorrectArgument {
-        if(idPerson == this.getId())
+        if (idPerson == this.getId())
             throw new IncorrectArgument();
         worker.add(idPerson);
     }
 
-    public int removeWorker(int idPerson){
+    public int removeWorker(int idPerson) {
         int index = -1;
         for (Integer i : worker) {
-            if(i == idPerson)
-               index = idPerson;
+            if (i == idPerson)
+                index = idPerson;
         }
         worker.remove(index);
         return workerSize();
     }
 
     public String printWorkers(List<Person> personList) throws WorkersListEmpty {
-        if(worker.size() <1)
+        if (worker.size() < 1)
             throw new WorkersListEmpty();
         StringBuilder rez = new StringBuilder();
         System.out.println(personList.size());
         for (int id : worker) {
             for (Person p : personList) {
-                if(p.getId() == id)
+                if (p.getId() == id)
                     rez.append(String.format("\nРаботники :\n%s : %s %s", p.getId(), p.getLastName(), p.getFirstName()));
 
             }
@@ -62,20 +62,30 @@ public class Manager extends Person implements Serializable {
         return rez.toString();
     }
 
-    public int workerSize(){
-return worker.size();
+    public int workerSize() {
+        return worker.size();
     }
 
     @Override
     public String save() {
-        String idWorker="";
+        String idWorker = "";
         for (Integer i : worker) {
-            idWorker+=i+" ";
+            idWorker += i + " ";
         }
         idWorker = idWorker.trim();
-        return String.format("%s %s %s %s %s %s %s%s%s",this.getId(), this.getFirstName(), this.getLastName(), this.getMidName(),
+        return String.format("%s %s %s %s %s %s %s%s%s", this.getId(), this.getFirstName(), this.getLastName(), this.getMidName(),
                 this.getBirthDate().format(formatter), this.getStartWorkDate().format(formatter),
-                this.getPersonType(),Person.customArgumentSeparator,idWorker);
+                this.getPersonType(), Person.customArgumentSeparator, idWorker);
+    }
+
+    @Override
+    public String toString() {
+        String dopArgument = "";
+        dopArgument += "Работников в подчинении :";
+        dopArgument += workerSize();
+        return String.format("%s : %s %s %s %s %s %s %s", getId(), getLastName(), getFirstName(),
+                getMidName(), getPersonType().print(), getBirthDate().format(formatter),
+                getStartWorkDate().format(formatter), dopArgument);
     }
 
 }

@@ -146,17 +146,4 @@ public abstract class Person {
             return o1.getBirthDate().compareTo(o2.getBirthDate());
         }
     }
-
-    @Override
-    public String toString() {
-        String dopArgument = "";
-        if(personType == PersonType.Manager){
-            dopArgument += "Работников в подчинении :";
-            dopArgument += ((Manager)this).workerSize();
-        }
-        if(personType == PersonType.Other){
-            dopArgument += ((Other)this).getDescription();
-        }
-        return String.format("%s : %s %s %s %s %s %s %s",id, lastName, firstName, midName, personType.print(), birthDate, startWorkDate, dopArgument);
-    }
 }

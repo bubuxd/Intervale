@@ -29,8 +29,15 @@ public class Other extends Person implements Serializable {
 
     @Override
     public String save() {
-        return String.format("%s %s %s %s %s %s %s%s%s",this.getId(), this.getFirstName(), this.getLastName(), this.getMidName(),
+        return String.format("%s %s %s %s %s %s %s%s%s",this.getId(), this.getFirstName(),
+                this.getLastName(),  this.getMidName(),
                 this.getBirthDate().format(formatter), this.getStartWorkDate().format(formatter),
                 this.getPersonType(),Person.customArgumentSeparator,description);
+    }
+    @Override
+    public String toString() { ;
+        return String.format("%s : %s %s %s %s %s %s %s", getId(), getLastName(), getFirstName(),
+                getMidName(), getPersonType().print(), getBirthDate().format(formatter),
+                getStartWorkDate().format(formatter), getDescription());
     }
 }
