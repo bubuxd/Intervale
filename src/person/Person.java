@@ -100,35 +100,35 @@ public abstract class Person {
     class PersonFirstNameComparator implements Comparator<Person> {
         @Override
         public int compare(Person o1, Person o2) {
-            return 0;
+            return o1.getFirstName().compareTo(o2.getFirstName());
         }
     }
 
     class PersonMidNameComparator implements Comparator<Person> {
         @Override
         public int compare(Person o1, Person o2) {
-            return 0;
+            return o1.getMidName().compareTo(o2.getMidName());
         }
     }
 
     class PersonLastNameComparator implements Comparator<Person> {
         @Override
         public int compare(Person o1, Person o2) {
-            return 0;
+            return o1.getLastName().compareTo(o2.getLastName());
         }
     }
 
     class PersonStartWorkDateComparator implements Comparator<Person> {
         @Override
         public int compare(Person o1, Person o2) {
-            return 0;
+            return o1.getStartWorkDate().compareTo(o2.getStartWorkDate());
         }
     }
 
     class PersonBirthDateComparator implements Comparator<Person> {
         @Override
         public int compare(Person o1, Person o2) {
-            return 0;
+            return o1.getBirthDate().compareTo(o2.getBirthDate());
         }
     }
 
