@@ -3,9 +3,13 @@ package io;
 import exception.IncorrectArgument;
 import exception.IncorrectType;
 import exception.ParseFileException;
-import person.*;
+import person.Manager;
+import person.Other;
+import person.Person;
+import person.Worker;
 
 import java.io.*;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +35,7 @@ public class ReadFile {
     private List<Person> customReeader() {
         List<Person> personList = new ArrayList<>();
         System.out.println("Файл прочитан по адресу : " + file.toString());
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), Charset.forName("UTF-8")))) {
             while (reader.ready()) {
                 Person p = separationPersonAndParametr(reader.readLine());
                 personList.add(p);
@@ -55,15 +59,16 @@ public class ReadFile {
             case "Worker":
                 return new Worker(person);
             case "Manager":
-                if (personAndParam.length > 2)
+                if (personAndParam.length > 1)
                     return new Manager(person, personAndParam[1]);
                 else
                     return new Manager(person, "");
             case "Other":
-                if (personAndParam.length > 2)
+                if (personAndParam.length > 1)
                     return new Other(person, personAndParam[1]);
                 else
                     return new Other(person, "");
+
         }
         throw new ParseFileException();
     }

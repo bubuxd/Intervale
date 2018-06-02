@@ -2,6 +2,9 @@ package io;
 
 import person.Person;
 import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 
 public class WriteFile {
@@ -17,7 +20,7 @@ public class WriteFile {
         if (!file.exists())
             file.createNewFile();
         System.out.println("Файл сохранен по адресу : "+file.toString());
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+        try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), Charset.forName("UTF-8"))) ) {
             for (Person person : personList) {
                 writer.write(person.save());
                 writer.write(System.lineSeparator());
