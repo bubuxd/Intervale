@@ -3,13 +3,12 @@ package person;
 import exception.IncorrectArgument;
 import exception.IncorrectType;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 
 public abstract class Person {
-    private static int currentId = 0;
+    private static int globalId = 0;
     public static String customArgumentSeparator = "#";
     public static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
     private int id;
@@ -21,7 +20,7 @@ public abstract class Person {
     private PersonType personType;
 
     public Person(String firstName, String lastName, String midName, LocalDate birthDate, LocalDate startWorkDate, String personType) throws IncorrectType {
-        this.id = currentId++;
+        this.id = ++globalId;
         this.lastName = lastName;
         this.firstName = firstName;
         this.midName = midName;
@@ -31,8 +30,11 @@ public abstract class Person {
     }
 
     public Person(String id, String firstName, String lastName, String midName, LocalDate birthDate, LocalDate startWorkDate, String personType) throws IncorrectType {
-        this.id = Integer.parseInt(id);
-        currentId = ++this.id;
+        int tmpId = Integer.parseInt(id);
+        if(tmpId > globalId){
+            globalId = tmpId;
+        }
+        this.id = tmpId;
         this.lastName = lastName;
         this.firstName = firstName;
         this.midName = midName;
@@ -41,8 +43,8 @@ public abstract class Person {
         this.personType = PersonType.getType(personType);
     }
 
-    public static int getCurrentId() {
-        return currentId;
+    public static int getGlobalId() {
+        return globalId;
     }
 
     public String getLastName() {

@@ -31,10 +31,9 @@ public class Manager extends Person implements Serializable {
     }
 
 
-    public void setWorker(int idPerson) throws IncorrectArgument {
-        if (idPerson == this.getId())
-            throw new IncorrectArgument();
-        worker.add(idPerson);
+    public void setWorker(int idPerson){
+        if (idPerson != this.getId())
+            worker.add(idPerson);
     }
 
     public int removeWorker(int idPerson) {
@@ -52,10 +51,11 @@ public class Manager extends Person implements Serializable {
             throw new WorkersListEmpty();
         StringBuilder rez = new StringBuilder();
         System.out.println(personList.size());
+        System.out.println("\nРаботники :\n");
         for (int id : worker) {
             for (Person p : personList) {
                 if (p.getId() == id)
-                    rez.append(String.format("\nРаботники :\n%s : %s %s", p.getId(), p.getLastName(), p.getFirstName()));
+                    rez.append(String.format("%s : %s %s", p.getId(), p.getLastName(), p.getFirstName()));
 
             }
         }

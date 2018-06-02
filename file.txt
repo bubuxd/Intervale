@@ -1,5 +1,6 @@
-1 Andrei Andreyenka Andreevich 28.02.1995 01.08.2017 Other#Просто душка :)
-2 Dmitri Dimidovich Dmitrievich 20.05.1987 30.10.2007 Manager#
-3 Pavel Pavlov Pavlavich 11.11.1911 30.10.2000 Manager#
-4 Tema Teterev Temovich 13.08.1951 20.03.1980 Manager#
-5 Faina Ai-na-na Faina-na 23.06.1998 20.03.2000 Other#Секретарь по особо важным поручениям
+2 Andrei Andreyenka Andreevich 28.02.1995 01.08.2017 Other#Просто душка :)
+3 Dmitri Dimidovich Dmitrievich 20.05.1987 30.10.2007 Manager#
+4 Pavel Pavlov Pavlavich 11.11.1911 30.10.2000 Manager#3 5
+5 Tema Teterev Temovich 13.08.1951 20.03.1980 Manager#
+6 Faina Ai-na-na Faina-na 23.06.1998 20.03.2000 Other#Секретарь по особо важным поручениям
+1 Tanay Klimova Fedorovna 20.02.1985 01.08.2010 Worker

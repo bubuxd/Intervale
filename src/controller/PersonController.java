@@ -98,6 +98,7 @@ public class PersonController {
 
     public int loadCurrentFolder() throws IOException {
         ReadFile file = new ReadFile(new File(PersonController.fileInCurentFolder).getAbsolutePath());
+        personList = new ArrayList<>();
         personList = file.read();
         return personList.size();
     }

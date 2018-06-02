@@ -22,7 +22,7 @@ public class Help implements Command {
                 if (command == null) {
                     System.out.println(MSG_COMMAND_NOT_FOUND);
                 } else {
-                    command.printHelp();
+                    System.out.println(command.printHelp());
                 }
                 System.out.println(MSG_DELIM);
             }
