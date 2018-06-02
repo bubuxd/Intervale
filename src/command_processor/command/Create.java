@@ -3,6 +3,7 @@ package command_processor.command;
 import controller.PersonController;
 import exception.IncorrectArgument;
 import exception.IncorrectType;
+import person.Person;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -17,9 +18,8 @@ public class Create implements Command {
             String firstName = args[1];
             String lastName = args[2];
             String midName = args[3];
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-            LocalDate birthDate = LocalDate.parse(args[4], formatter);
-            LocalDate startWorkDate = LocalDate.parse(args[5], formatter);
+            LocalDate birthDate = LocalDate.parse(args[4], Person.formatter);
+            LocalDate startWorkDate = LocalDate.parse(args[5], Person.formatter);
             int[] idAndListSize = controller.createPerson(firstName, lastName, midName, birthDate, startWorkDate, personType);
             System.out.println(String.format("Ид созданого работника : %s \nВсего работников в списке : %s", idAndListSize[0], idAndListSize[1]));
         return true;

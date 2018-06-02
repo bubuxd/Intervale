@@ -6,6 +6,7 @@ import exception.WorkersListEmpty;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,19 +19,32 @@ public class Manager extends Person implements Serializable {
         worker = new ArrayList<>();
     }
 
+    public Manager(String[] person, String workerList) throws IncorrectArgument, IncorrectType {
+        super(person[0],person[1], person[2], person[3],
+                LocalDate.parse(person[4], formatter),LocalDate.parse(person[5], formatter),
+                person[6]);
+        worker= new ArrayList<>();
+        if(workerList.length() > 0)
+        for (String idWorker : workerList.trim().split(" ")) {
+            this.setWorker(Integer.parseInt(idWorker));
+        }
+    }
+
+
     public void setWorker(int idPerson) throws IncorrectArgument {
         if(idPerson == this.getId())
             throw new IncorrectArgument();
         worker.add(idPerson);
     }
 
-    public void removeWorker(int idPerson){
+    public int removeWorker(int idPerson){
         int index = -1;
         for (Integer i : worker) {
             if(i == idPerson)
                index = idPerson;
         }
         worker.remove(index);
+        return workerSize();
     }
 
     public String printWorkers(List<Person> personList) throws WorkersListEmpty {
@@ -52,5 +66,16 @@ public class Manager extends Person implements Serializable {
 return worker.size();
     }
 
+    @Override
+    public String save() {
+        String idWorker="";
+        for (Integer i : worker) {
+            idWorker+=i+" ";
+        }
+        idWorker = idWorker.trim();
+        return String.format("%s %s %s %s %s %s %s%s%s",this.getId(), this.getFirstName(), this.getLastName(), this.getMidName(),
+                this.getBirthDate().format(formatter), this.getStartWorkDate().format(formatter),
+                this.getPersonType(),Person.customArgumentSeparator,idWorker);
+    }
 
 }

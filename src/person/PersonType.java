@@ -18,7 +18,7 @@ public enum PersonType {
     Other('o') {
         @Override
         public String print() {
-            return "Просто спец";
+            return "Специалист";
         }
     };
     private char shortName;
@@ -34,10 +34,13 @@ public enum PersonType {
     public static PersonType getType(String personType) throws IncorrectType {
         switch (personType) {
             case "m":
+            case "Manager":
                 return PersonType.Manager;
             case "o":
+            case "Other":
                 return PersonType.Other;
             case "w":
+            case "Worker":
                 return PersonType.Worker;
         }
         throw new IncorrectType();

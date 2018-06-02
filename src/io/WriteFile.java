@@ -1,9 +1,6 @@
 package io;
 
-import person.Manager;
 import person.Person;
-import person.PersonType;
-
 import java.io.*;
 import java.util.List;
 
@@ -19,12 +16,12 @@ public class WriteFile {
     public void save() throws IOException {
         if (!file.exists())
             file.createNewFile();
-        System.out.println(file.toString());
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file))) {
+        System.out.println("Файл сохранен по адресу : "+file.toString());
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             for (Person person : personList) {
-                oos.writeChar(person.getPersonType().getShortName());
-                oos.writeObject(person);
-                oos.flush();
+                writer.write(person.save());
+                writer.write(System.lineSeparator());
+                writer.flush();
             }
         } catch (IOException ex) {
             ex.printStackTrace();

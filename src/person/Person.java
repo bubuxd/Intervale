@@ -5,11 +5,13 @@ import exception.IncorrectType;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 
 public abstract class Person {
     private static int currentId = 0;
-
+    public static String customArgumentSeparator = "#";
+    public static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
     private int id;
     private String lastName;
     private String firstName;
@@ -20,6 +22,17 @@ public abstract class Person {
 
     public Person(String firstName, String lastName, String midName, LocalDate birthDate, LocalDate startWorkDate, String personType) throws IncorrectType {
         this.id = currentId++;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.midName = midName;
+        this.birthDate = birthDate;
+        this.startWorkDate = startWorkDate;
+        this.personType = PersonType.getType(personType);
+    }
+
+    public Person(String id, String firstName, String lastName, String midName, LocalDate birthDate, LocalDate startWorkDate, String personType) throws IncorrectType {
+        this.id = Integer.parseInt(id);
+        currentId = ++this.id;
         this.lastName = lastName;
         this.firstName = firstName;
         this.midName = midName;
@@ -96,6 +109,8 @@ public abstract class Person {
         throw new IncorrectArgument();
     }
 
+    public abstract String save();
+
 
     class PersonFirstNameComparator implements Comparator<Person> {
         @Override
@@ -134,11 +149,14 @@ public abstract class Person {
 
     @Override
     public String toString() {
-        String workersSize = "";
+        String dopArgument = "";
         if(personType == PersonType.Manager){
-            workersSize += "Работников в подчинении :";
-            workersSize += ((Manager)this).workerSize();
+            dopArgument += "Работников в подчинении :";
+            dopArgument += ((Manager)this).workerSize();
         }
-        return String.format("%s : %s %s %s %s %s %s %s",id, lastName, firstName, midName, personType.print(), birthDate, startWorkDate, workersSize);
+        if(personType == PersonType.Other){
+            dopArgument += ((Other)this).getDescription();
+        }
+        return String.format("%s : %s %s %s %s %s %s %s",id, lastName, firstName, midName, personType.print(), birthDate, startWorkDate, dopArgument);
     }
 }

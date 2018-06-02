@@ -131,4 +131,14 @@ public class PersonController {
     public List<Person> getWorkersList() {
         return personList;
     }
+
+    public int removeWorkerInManager(String idManager, String idWorker) {
+        int idM = Integer.parseInt(idManager);
+        int rez = 0;
+        for (Person person : personList) {
+            if(person.getId() == idM)
+                rez = ((Manager)person).removeWorker(Integer.parseInt(idWorker));
+        }
+        return rez;
+    }
 }
